@@ -1,7 +1,7 @@
-package projects.jatin.quizme.Model;
+package projects.jatin.quizme.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import projects.jatin.quizme.R;
 

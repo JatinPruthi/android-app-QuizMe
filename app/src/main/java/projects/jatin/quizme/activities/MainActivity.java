@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
     MaterialEditText edtNewUser, edtNewPassword, edtNewConfirmPassword, edtNewEmail; //forSignUp
     MaterialEditText edtUser,edtPassword;
 
-    Button btnSignup,btnSignIn;
+    Button btnSignIn;
+
+    TextView btnSignup;
     
     //signup Dialog Button
    Button btnDialogSignup;
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         edtPassword= (MaterialEditText) findViewById(R.id.edtPassword);
 
         btnSignIn= (Button) findViewById(R.id.btnSignIn);
-        btnSignup= (Button) findViewById(R.id.btnSignUp);
+        btnSignup= (TextView) findViewById(R.id.btnSignUp);
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,13 +166,14 @@ public class MainActivity extends AppCompatActivity {
                                 "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
                                 ")+");
 
-                if(!EMAIL_ADDRESS_PATTERN.matcher(edtNewEmail.getText().toString()).matches()){
-
-                    edtNewEmail.setError("Please enter a valid Email address.");
+                if(edtNewUser.getText().toString().isEmpty()) {
+                    edtNewUser.setError("Empty Field!");
                     return false;
                 }
-                else if(edtNewUser.getText().toString().isEmpty()) {
-                    edtNewUser.setError("Empty Field!");
+
+               else if(!EMAIL_ADDRESS_PATTERN.matcher(edtNewEmail.getText().toString()).matches()){
+
+                    edtNewEmail.setError("Please enter a valid Email address.");
                     return false;
                 }
                 else if(edtNewEmail.getText().toString().isEmpty()) {

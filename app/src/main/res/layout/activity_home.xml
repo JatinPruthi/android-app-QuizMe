@@ -7,16 +7,10 @@
     android:layout_height="match_parent"
     tools:context="projects.jatin.quizme.activities.HomeActivity">
 
-    <FrameLayout
-        android:layout_above="@+id/navigation"
-        android:animateLayoutChanges="true"
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation"
+<android.support.design.widget.BottomNavigationView
+    android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -24,5 +18,14 @@
         app:menu="@menu/bottom_menu"
         app:itemTextColor="@drawable/nav_item_color_state"
         app:itemIconTint="@drawable/nav_item_color_state"/>
+
+    <FrameLayout
+        android:layout_above="@id/navigation"
+        android:animateLayoutChanges="true"
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
 
 </RelativeLayout>

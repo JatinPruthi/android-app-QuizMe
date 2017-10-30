@@ -1,5 +1,6 @@
 package projects.jatin.quizme.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -76,9 +77,11 @@ public class MainActivity extends AppCompatActivity {
                     if(!username.isEmpty())
                     {
                         User login=dataSnapshot.child(username).getValue(User.class);
-                        if(login.getPassword().equals(pwd))
+                        if(login.getPassword().equals(pwd)) {
                             Toasty.success(MainActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
-                        else
+                            startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                            finish();
+                        } else
                             Toasty.error(MainActivity.this, "Wrong password.", Toast.LENGTH_SHORT).show();
                     }
                     else

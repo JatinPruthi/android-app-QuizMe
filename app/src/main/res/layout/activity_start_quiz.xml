@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="projects.jatin.quizme.activities.StartQuizActivity">
+
+
+    <ImageView
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/imgLogo"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp" />
+
+    
+    <android.support.v7.widget.CardView
+        app:cardElevation="@dimen/_4sdp"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:background="#AD1457"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="PLAY"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            android:theme="@style/MyButton"
+            android:layout_margin="@dimen/_8sdp"
+            android:id="@+id/btnPlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

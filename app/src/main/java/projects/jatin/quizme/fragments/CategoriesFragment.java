@@ -1,6 +1,7 @@
 package projects.jatin.quizme.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -17,6 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import projects.jatin.quizme.R;
+import projects.jatin.quizme.activities.StartQuizActivity;
+import projects.jatin.quizme.common.Common;
 import projects.jatin.quizme.interfaces.ItemClickListener;
 import projects.jatin.quizme.model.Categories;
 import projects.jatin.quizme.viewholder.CategoriesViewHolder;
@@ -84,7 +86,11 @@ public class CategoriesFragment extends Fragment {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(getActivity(), String.format("%s|%s",adapter.getRef(position).getKey(),model.getName()), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), String.format("%s|%s",adapter.getRef(position).getKey(),model.getName()), Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(getActivity(), StartQuizActivity.class);
+                        Common.categoryId=adapter.getRef(position).getKey();
+                        startActivity(intent);
+
                     }
                 });
             }

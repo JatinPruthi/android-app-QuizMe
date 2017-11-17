@@ -21,7 +21,8 @@
         <activity android:name=".activities.Splash" />
         <activity android:name=".activities.HomeActivity" />
         <activity android:name=".activities.StartQuizActivity" />
-        <activity android:name=".activities.GameplayActivity"></activity>
+        <activity android:name=".activities.GameplayActivity" />
+        <activity android:name=".activities.GameOverActivity"></activity>
     </application>
 
 </manifest>

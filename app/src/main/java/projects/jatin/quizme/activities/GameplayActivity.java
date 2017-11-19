@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import projects.jatin.quizme.R;
 import projects.jatin.quizme.common.Common;
@@ -27,7 +28,6 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
     int index = 0, score = 0, thisQuestion = 0, totalQuestion, correctAnswer;
 
     //Firebase
-
     FirebaseDatabase database;
     DatabaseReference questions;
 
@@ -37,7 +37,7 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
     private Button btnAnswerB;
     private Button btnAnswerC;
     private Button btnAnswerD;
-    private TextView txtScore;
+    private TextView txtScore,txtQuestionNum,questionText;
 
 
     @Override
@@ -56,6 +56,8 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
         btnAnswerC = (Button) findViewById(R.id.btnAnswerC);
         btnAnswerD = (Button) findViewById(R.id.btnAnswerD);
         txtScore=findViewById(R.id.txtScore);
+        txtQuestionNum=findViewById(R.id.txtTotalQuestion);
+        questionText=findViewById(R.id.txtQuestion);
 
         btnAnswerA.setOnClickListener(this);
         btnAnswerB.setOnClickListener(this);
@@ -80,14 +82,15 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
             else
             {
                  // wrong answer chosen
-                Intent intent=new Intent(this,GameOverActivity.class);
-                Bundle dataSend=new Bundle();
-                dataSend.putInt("SCORE",score);
-                dataSend.putInt("TOTAL",totalQuestion);
-                dataSend.putInt("CORRECT",correctAnswer);
-                intent.putExtras(dataSend);
-                startActivity(intent);
-                finish();
+//                Intent intent=new Intent(this,GameOverActivity.class);
+//                Bundle dataSend=new Bundle();
+//                dataSend.putInt("SCORE",score);
+//                dataSend.putInt("TOTAL",totalQuestion);
+//                dataSend.putInt("CORRECT",correctAnswer);
+//                intent.putExtras(dataSend);
+//                startActivity(intent);
+//                finish();
+                showQuestion(++index);
             }
 
             txtScore.setText(String.format("%d",score));
@@ -114,8 +117,73 @@ public class GameplayActivity extends AppCompatActivity implements View.OnClickL
         if(index<totalQuestion)
         {
             thisQuestion++;
+            txtQuestionNum.setText(String.format("%d/%d",thisQuestion,totalQuestion));
+            progressBar.setProgress(0);
+            progressValue=0;
+            if(Common.questionList.get(index).getIsImageQuestion().equals("true"))
+            {
+                //image question
+                Picasso.with(getBaseContext())
+                        .load(Common.questionList.get(index).getQuestion())
+                        .into(ivQuestion);
+                ivQuestion.setVisibility(View.VISIBLE);
+                questionText.setVisibility(View.GONE);
+            }
+            else
+            {
+                questionText.setText(Common.questionList.get(index).getQuestion());
+
+                ivQuestion.setVisibility(View.GONE);
+                questionText.setVisibility(View.VISIBLE);
+            }
+
+            btnAnswerA.setText(Common.questionList.get(index).getAnswerA());
+            btnAnswerB.setText(Common.questionList.get(index).getAnswerB());
+            btnAnswerC.setText(Common.questionList.get(index).getAnswerC());
+            btnAnswerD.setText(Common.questionList.get(index).getAnswerD());
+
+            //start the timer
+            mCountDown.start();
+
 
         }
+        else
+        {
+            //for final question
+            Intent intent=new Intent(this,GameOverActivity.class);
+            Bundle dataSend=new Bundle();
+            dataSend.putInt("SCORE",score);
+            dataSend.putInt("TOTAL",totalQuestion);
+            dataSend.putInt("CORRECT",correctAnswer);
+            intent.putExtras(dataSend);
+            startActivity(intent);
+            finish();
+        }
 
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        totalQuestion=Common.questionList.size();
+
+        mCountDown=new CountDownTimer(TIMEOUT,INTERVAL) {
+            @Override
+            public void onTick(long l) {
+
+                progressBar.setProgress(progressValue);
+                progressValue++;
+            }
+
+            @Override
+            public void onFinish() {
+
+                mCountDown.cancel();
+                showQuestion(++index);
+            }
+        };
+        showQuestion(index);
     }
 }

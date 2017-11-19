@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 
 import es.dmoral.toasty.Toasty;
 import projects.jatin.quizme.R;
+import projects.jatin.quizme.common.Common;
 import projects.jatin.quizme.model.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         User login=dataSnapshot.child(username).getValue(User.class);
                         if(login.getPassword().equals(pwd)) {
                             Toasty.success(MainActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
+                            Common.currentUser=login;
                             startActivity(new Intent(MainActivity.this,HomeActivity.class));
                             finish();
                         } else

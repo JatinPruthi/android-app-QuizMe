@@ -1,15 +1,54 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="projects.jatin.quizme.fragments.RankingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:textColor="@color/Red"
-        android:textSize="32sp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This is Rankings Fragment." />
 
-</FrameLayout>
+    <android.support.v7.widget.CardView
+        android:id="@+id/title"
+        android:padding="@dimen/_16sdp"
+        android:layout_margin="@dimen/_16sdp"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
+        android:elevation="@dimen/_4sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/White"
+                android:textSize="24sp"
+                android:text="Name"
+                android:layout_weight="8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:textColor="@color/White"
+                android:textSize="24sp"
+                android:text="Score"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rankingList"
+        android:layout_below="@id/title"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+</RelativeLayout>

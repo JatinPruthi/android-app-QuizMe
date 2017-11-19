@@ -19,5 +19,27 @@ public class QuestionScore {
         Score = score;
     }
 
+    public String getQuestion_Score() {
+        return Question_Score;
+    }
 
+    public void setQuestion_Score(String question_Score) {
+        Question_Score = question_Score;
+    }
+
+    public String getUser() {
+        return User;
+    }
+
+    public void setUser(String user) {
+        User = user;
+    }
+
+    public String getScore() {
+        return Score;
+    }
+
+    public void setScore(String score) {
+        Score = score;
+    }
 }
